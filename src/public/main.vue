@@ -83,7 +83,6 @@ Vue.component("account-status", statusComponent);
 
 <style>
 body {
-  padding: 50px;
   padding-top: 4.5rem;
 }
 </style>
