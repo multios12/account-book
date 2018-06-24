@@ -2,7 +2,7 @@
   <b-card-group deck style="margin-top:20px">
       <b-card bg-variant="light" header="expenses(cash)">
         <div class="row">
-            <div class="col" v-for="item in items1" v-bind:key="item">
+            <div class="col" v-for="item in items1" v-bind:key="item.group">
                 <div>{{getGroupName(item.group)}}</div>
                 <div>{{item.amount}}</div>
             </div>
@@ -10,7 +10,7 @@
       </b-card>
       <b-card bg-variant="light" header="expenses(bank)">
         <div class="row">
-            <div class="col" v-for="item in items2" v-bind:key="item">
+            <div class="col" v-for="item in items2" v-bind:key="item.group">
                 <div>{{getGroupName(item.group)}}</div>
                 <div>{{item.amount}}</div>
             </div>
@@ -18,7 +18,7 @@
       </b-card>
       <b-card bg-variant="light" header="expenses(credit)">
         <div class="row">
-            <div class="col" v-for="item in items3" v-bind:key="item">
+            <div class="col" v-for="item in items3" v-bind:key="item.group">
                 <div>{{getGroupName(item.group)}}</div>
                 <div>{{item.amount}}</div>
             </div>
@@ -51,18 +51,22 @@ export default Vue.extend({
   },
   methods: {
     show: function() {
+      console.log("show");
       this.items = [];
       var url = "./status?month=" + this.selectedMonth;
       axios.get(url).then(value => {
         this.items1 = [];
         this.items2 = [];
         this.items3 = [];
+        
+        console.log("axios");
         for (let index = 0; index < value.data.length; index++) {
           const element = value.data[index];
           if (element.group < 500) {
             continue;
           }
 
+          console.log("items1:s");
           if (element.type == 10) {
             this.items1.push(element);
           } else if (element.type == 20) {
@@ -70,6 +74,7 @@ export default Vue.extend({
           } else {
             this.items3.push(element);
           }
+          console.log("items1:e");
         }
       });
     },
@@ -80,6 +85,7 @@ export default Vue.extend({
           return element.text;
         }
       }
+      console.log("getGroupName")
     }
   }
 });
