@@ -3,6 +3,10 @@
   "description": "家計簿",
   "version": "1.0.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/multios12/account-book.git"
+  },
   "scripts": {
     "start": "node dist/server.js",
     "build": "webpack --mode development && tsc",

@@ -12,6 +12,7 @@ var app = express();
 app.use(logger('dev'));
 
 // browser-sync Setup 
+/*
 if (app.get('env') == 'development') {
   var browserSync = require('browser-sync');
   var connectBrowserSync = require('connect-browser-sync');
@@ -19,6 +20,7 @@ if (app.get('env') == 'development') {
   var browserSyncConfigurations = { "files": path.join(__dirname, "../views/*") };
   app.use(connectBrowserSync(browserSync(browserSyncConfigurations)));
 }
+*/
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
