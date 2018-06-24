@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "webpack --mode development && tsc",
-    "release": "webpack --mode production",
+    "release": "webpack --mode production && tsc",
     "watch": "run-p watch.*",
     "watch.ts": "nodemon --ext ts --watch src -x tsc",
     "watch.bundle": "nodemon --ext ts,html,vue --watch src/public -x webpack --mode development"
