@@ -55,6 +55,11 @@ export default Vue.extend({
         self.days3 = [];
         for (let index = 0; index < value.data.length; index++) {
           const element = value.data[index];
+          var amount = element.cash + element.bank + element.credit;
+          if (amount <= -10000) {
+            element._rowVariant = 'danger';
+          }
+
           if (index < 10) {
             self.days.push(element);
           } else if (index < 20) {

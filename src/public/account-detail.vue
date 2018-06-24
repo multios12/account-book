@@ -7,15 +7,15 @@
       <b-card>
         <b-form inline>
             <b-input-group  class="mb-2 mr-sm-2 mb-sm-0">
-                <b-form-select v-model="type" :options="settings.types" />
+                <b-form-select v-model="type" :options="settings.types"  size="lg"/>
             </b-input-group>
             <b-input-group  class="mb-2 mr-sm-2 mb-sm-0">
-                <b-form-select v-model="account" :options="settings.accounts" />
+                <b-form-select v-model="account" :options="settings.accounts"  size="lg"/>
             </b-input-group>
             <b-input-group  class="mb-2 mr-sm-2 mb-sm-0">
-                <b-form-input  type="number" v-model="amount" placeholder="金額" ></b-form-input>
+                <b-form-input  type="number" v-model="amount" placeholder="金額"  size="lg"></b-form-input>
             </b-input-group>
-            <b-button size="sm" @click="regist">登録</b-button>
+            <b-button size="sm" @click="regist" >登録</b-button>
         </b-form>
       </b-card>
       <b-table small :fields="fields" :items="items">

@@ -15,7 +15,7 @@
       </b-collapse>
     </nav>
 
-    <main role="main" class="container">
+    <main role="main" class="container-fluid">
       <account-detail v-if="selectedDate!=null" :selectedDate="selectedDate" :settings="settings" @back="changeMonth"></account-detail>
       <account-month  v-else              :selectedMonth="selectedMonth" @date-clicked="dateClicked"></account-month>
       <account-status v-if="selectedDate==null" :selectedMonth="selectedMonth"  :settings="settings"></account-status>

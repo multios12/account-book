@@ -1,30 +1,30 @@
 <template>
-    <b-card-group class="row">
-        <b-card class="col-lg-4" header="expenses(cash)">
-            <div class="row">
-                <div class="col" v-for="item in items1" v-bind:key="item">
-                    <div>{{getGroupName(item.group)}}</div>
-                    <div>{{item.amount}}</div>
-                </div>
+  <b-card-group deck style="margin-top:20px">
+      <b-card bg-variant="light" header="expenses(cash)">
+        <div class="row">
+            <div class="col" v-for="item in items1" v-bind:key="item">
+                <div>{{getGroupName(item.group)}}</div>
+                <div>{{item.amount}}</div>
             </div>
-        </b-card>
-        <b-card class="col-lg-4" header="expenses(bank)">
-            <div class="row">
-                <div class="col" v-for="item in items2" v-bind:key="item">
-                    <div>{{getGroupName(item.group)}}</div>
-                    <div>{{item.amount}}</div>
-                </div>
+        </div>
+      </b-card>
+      <b-card bg-variant="light" header="expenses(bank)">
+        <div class="row">
+            <div class="col" v-for="item in items2" v-bind:key="item">
+                <div>{{getGroupName(item.group)}}</div>
+                <div>{{item.amount}}</div>
             </div>
-        </b-card>
-        <b-card class="col-lg-4" header="expenses(credit)">
-            <div class="row">
-                <div class="col" v-for="item in items3" v-bind:key="item">
-                    <div>{{getGroupName(item.group)}}</div>
-                    <div>{{item.amount}}</div>
-                </div>
+        </div>
+      </b-card>
+      <b-card bg-variant="light" header="expenses(credit)">
+        <div class="row">
+            <div class="col" v-for="item in items3" v-bind:key="item">
+                <div>{{getGroupName(item.group)}}</div>
+                <div>{{item.amount}}</div>
             </div>
-        </b-card>
-    </b-card-group>
+        </div>
+      </b-card>
+  </b-card-group>
 </template>
 
 <script lang="ts">
