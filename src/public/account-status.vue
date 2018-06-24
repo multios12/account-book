@@ -51,7 +51,6 @@ export default Vue.extend({
   },
   methods: {
     show: function() {
-      console.log("show");
       this.items = [];
       var url = "./status?month=" + this.selectedMonth;
       axios.get(url).then(value => {
@@ -59,14 +58,12 @@ export default Vue.extend({
         this.items2 = [];
         this.items3 = [];
         
-        console.log("axios");
         for (let index = 0; index < value.data.length; index++) {
           const element = value.data[index];
           if (element.group < 500) {
             continue;
           }
 
-          console.log("items1:s");
           if (element.type == 10) {
             this.items1.push(element);
           } else if (element.type == 20) {
@@ -74,7 +71,6 @@ export default Vue.extend({
           } else {
             this.items3.push(element);
           }
-          console.log("items1:e");
         }
       });
     },
@@ -85,7 +81,6 @@ export default Vue.extend({
           return element.text;
         }
       }
-      console.log("getGroupName")
     }
   }
 });

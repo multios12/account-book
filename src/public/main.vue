@@ -2,17 +2,15 @@
   <div>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <b-navbar-brand class="navbar-brand" @click="changeMonthToNow()">account-book</b-navbar-brand>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <b-collapse is-nav id="navbarsExampleDefault">
+      <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav class="mr-auto">
           <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" />
-          <b-nav-item active @click="dateClicked()">today</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
+      <b-navbar-nav>
+        <b-nav-item active @click="dateClicked()">today</b-nav-item>
+      </b-navbar-nav>
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     </nav>
 
     <main role="main" class="container-fluid">
