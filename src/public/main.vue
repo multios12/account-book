@@ -3,11 +3,12 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <b-navbar-brand class="navbar-brand" @click="changeMonthToNow()">account-book</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
-        <b-navbar-nav class="mr-auto">
+        <b-navbar-nav>
           <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" />
         </b-navbar-nav>
+          <b-nav-text> 残高{{balance}}</b-nav-text>
       </b-collapse>
-      <b-navbar-nav>
+      <b-navbar-nav is-nav class="float-left">
         <b-nav-item active @click="dateClicked()">today</b-nav-item>
       </b-navbar-nav>
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -15,7 +16,7 @@
 
     <main role="main" class="container-fluid">
       <account-detail v-if="selectedDate!=null" :selectedDate="selectedDate" :settings="settings" @back="changeMonth"></account-detail>
-      <account-month  v-else              :selectedMonth="selectedMonth" @date-clicked="dateClicked"></account-month>
+      <account-month  v-else              :selectedMonth="selectedMonth" @date-clicked="dateClicked" @balance-changed="balanceClicked"></account-month>
       <account-status v-if="selectedDate==null" :selectedMonth="selectedMonth"  :settings="settings"></account-status>
     </main>
   </div>
@@ -35,7 +36,8 @@ export default Vue.extend({
       settings: {},
       selectedMonth: null,
       selectedDate: null,
-      months: []
+      months: [],
+      balance: 0
     };
   },
   created: function() {
@@ -71,6 +73,9 @@ export default Vue.extend({
         targetdate = moment(new Date()).format("YYYY-MM-DD");
       }
       this.selectedDate = targetdate;
+    },
+    balanceClicked: function(value: number) {
+      this.balance = value;
     }
   }
 });
@@ -83,4 +88,10 @@ Vue.component("account-status", statusComponent);
 body {
   padding-top: 4.5rem;
 }
+
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
 </style>
+ 
