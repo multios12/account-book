@@ -15,14 +15,14 @@
             <b-input-group  class="mb-2 mr-sm-2 mb-sm-0">
                 <b-form-input  type="number" v-model="amount" placeholder="金額"></b-form-input>
             </b-input-group>
-            <b-button size="sm" @click="regist" >登録</b-button>
+            <b-button variant="primary" size="sm" @click="regist" >登録</b-button>
         </b-form>
       </b-card>
       <b-table small :fields="fields" :items="items">
         <template slot="typeColumn" slot-scope="data">{{getTypeName(data.item.type)}}</template>
         <template slot="accountColumn" slot-scope="data">{{getAccountName(data.item.account)}}</template>
         <template slot="deleteColumn" slot-scope="data">
-          <b-button size="sm" @click="deleteDetail(data.item.id)">削除</b-button>
+          <b-button variant="secondary" size="sm" @click="deleteDetail(data.item.id)">削除</b-button>
         </template>
       </b-table>
     </b-card>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap/dist/css/bootstrap.css'
+import './bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import mainComponent from './main.vue'
