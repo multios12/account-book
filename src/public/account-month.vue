@@ -27,18 +27,19 @@
 import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
+import router from "./router";
 
 export default Vue.extend({
   data() {
     return {
-      fields: [{key:"dateColumn", label:"date"}, "cash", "bank", "credit"],
-      settings: {},
+      fields: [{ key: "dateColumn", label: "date" }, "cash", "bank", "credit"],
       days: [],
       days2: [],
-      days3: []
+      days3: [],
+      selectedMonth: null
     };
   },
-  props: ["selectedDate", "selectedMonth"],
+  props: ["settings"],
   computed: {
     title: function() {
       return this.selectedMonth;
@@ -50,8 +51,11 @@ export default Vue.extend({
     }
   },
   created: function() {
-    this.show();
+    var value: string = this.$route.path;
+    value = value.substring(1);
+    this.selectedMonth = value.replace(/\//g, "-");
   },
+
   methods: {
     show: function() {
       var self = this;
@@ -61,30 +65,30 @@ export default Vue.extend({
         self.days2 = [];
         self.days3 = [];
 
-        var nowDate = moment(new Date()).format('YYYY-MM-DD');
+        var nowDate = moment(new Date()).format("YYYY-MM-DD");
         var total: number = 0;
         for (let index = 0; index < value.data.length; index++) {
           const element = value.data[index];
           var amount = element.cash + element.bank + element.credit;
           total += amount;
           if (amount <= -10000) {
-            element._rowVariant = 'danger';
+            element._rowVariant = "danger";
           }
 
           var d = new Date(element.date);
-          if(d.getDay() == 0) {
-            element.class = "text-danger"; 
-          } else if(d.getDay() == 6) {
+          if (d.getDay() == 0) {
+            element.class = "text-danger";
+          } else if (d.getDay() == 6) {
             element.class = "text-primary";
           } else {
             element.class = "";
           }
 
-          if(element.date == nowDate) {
+          if (element.date == nowDate) {
             element.class += " font-weight-bold";
           }
 
-          element.shortdate = moment(element.date).format('MM-DD');
+          element.shortdate = moment(element.date).format("MM-DD");
 
           if (index < 10) {
             self.days.push(element);
@@ -98,8 +102,22 @@ export default Vue.extend({
       });
     },
     rowClicked: function(item: any, index: number, event: any) {
-      this.$emit("date-clicked", item.date);
+      var d = moment(item.date);
+      var p = d.format("/YYYY/MM/DD");
+      router.push(p);
     }
   }
 });
 </script>
+
+<style>
+body {
+  padding-top: 4.5rem;
+}
+
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+</style>
+ 

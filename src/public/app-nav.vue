@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <b-navbar-brand class="navbar-brand" @click="changeMonthToNow()">account-book</b-navbar-brand>
+      <b-navbar-brand class="navbar-brand"><router-link to="/">account-book</router-link></b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
           <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" />
@@ -18,11 +18,11 @@
 import Vue from 'vue'
 import moment from "moment";
 import axios from "axios";
+import router from './router'
 
 export default Vue.extend({
   data() {
     return {
-      selectedDate: null,
       months: [],
       balance: 0
     };
@@ -37,6 +37,37 @@ export default Vue.extend({
         text: targetDate.format("YYYY-MM")
       });
     }
-  },    
+  },
+  methods:{
+    changeMonth: function(value: any) {
+      if (value == null) {
+        value = this.selectedMonth;
+        return;
+      }
+
+      value = value + '-01'
+      var d = moment(value);
+      var p = d.format("/YYYY/MM");
+
+      router.push(p);
+    },
+    changeMonthToNow: function() {
+      var targetDate = moment(new Date()).format("YYYY-MM");
+      this.changeMonth(targetDate);
+    },
+    dateClicked: function(targetdate: string) {
+      var d = moment(new Date());
+      var p = d.format("/YYYY/MM/DD");
+      router.push(p);
+    },
+  }
 })
 </script>
+
+<style>
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+</style>
+ 

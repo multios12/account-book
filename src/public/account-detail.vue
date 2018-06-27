@@ -47,10 +47,11 @@ export default Vue.extend({
       id: null,
       type: 10,
       account: 500,
-      amount: 0
+      amount: 0,
+      selectedDate:null
     };
   },
-  props: ["settings", "selectedDate"],
+  props: ["settings"],
   watch: {
     selectedDate: function() {
       this.initial();
@@ -63,7 +64,9 @@ export default Vue.extend({
     }
   },
   created: function() {
-    this.show();
+    var value:string = this.$route.path;
+    value = value.substring(1);
+    this.selectedDate = value.replace(/\//g, '-');
   },
   methods: {
     regist: function() {
@@ -87,7 +90,6 @@ export default Vue.extend({
       });
     },
     deleteDetail: function(value: any) {
-      console.log("aaa");
       var self = this;
       axios.delete("./details?id=" + value).then(value => self.show());
     },
@@ -104,7 +106,7 @@ export default Vue.extend({
       });
     },
     back: function() {
-      this.$emit("back");
+      this.$route.push(this.selectedDate.substring());
     },
     getTypeName: function(value: any) {
       for (let index = 0; index < this.settings.types.length; index++) {
@@ -125,3 +127,15 @@ export default Vue.extend({
   }
 });
 </script>
+
+<style>
+.listCard {
+  padding-top: 4.5rem;
+}
+
+.custom-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+</style>
+ 

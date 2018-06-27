@@ -9,18 +9,10 @@ import './bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import navComponent from './app-nav.vue';
-import monthComponent from './account-month.vue';
-import detailComponent from './account-detail.vue';
+import router from './router'
 
-Vue.use(VueRouter);
+//Vue.use(VueRouter);
 Vue.use(BootstrapVue);
-
-var routes: any = [
-    { path: '/', component: monthComponent },
-    { path: '/detail', component: detailComponent },
-];
-
-var router = new VueRouter({ routes: routes });
 
 const app = new Vue({
     router,
@@ -33,9 +25,18 @@ const app = new Vue({
 
     },
     created: function () {
-        var nowDate = new Date();
-        this.selectedMonth = moment(nowDate).format("YYYY-MM");
         var self = this;
-        axios.get("./settings").then(value => (self.settings = value.data));
+        axios.get("./settings").then(value => {
+            self.settings = value.data
+            self.selectedMonth = moment(new Date()).format("YYYY-MM");
+        });
+    },
+    methods: {
+        monthChanged:function(value:string){
+            this.selectedMonth = value;
+        },
+        dateChanged:function(value:string) {
+            this.selectedDate = value;
+        }
     }
 }).$mount('#app')
