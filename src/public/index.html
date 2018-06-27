@@ -14,7 +14,12 @@
 </head>
 
 <body>
-    <app-main id="app"></app-main>
+  
+  <div id="app">
+      <app-nav     :selectedMonth="selectedMonth" :settings="settings"></app-nav>
+      <router-view :selectedMonth="selectedMonth" :settings="settings"></router-view>
+  </div>
+    <!-- <app-main id="app"></app-main> -->
   <script src="script.js"></script>
 </body>
 

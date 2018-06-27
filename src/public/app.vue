@@ -1,19 +1,5 @@
 <template>
   <div>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <b-navbar-brand class="navbar-brand" @click="changeMonthToNow()">account-book</b-navbar-brand>
-      <b-collapse is-nav id="nav_collapse">
-        <b-navbar-nav>
-          <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" />
-        </b-navbar-nav>
-          <b-nav-text> 残高{{balance}}</b-nav-text>
-      </b-collapse>
-      <b-navbar-nav is-nav class="float-left">
-        <b-nav-item active @click="dateClicked()">today</b-nav-item>
-      </b-navbar-nav>
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-    </nav>
-
     <main role="main" class="container-fluid">
       <account-detail v-if="selectedDate!=null" :selectedDate="selectedDate" :settings="settings" @back="changeMonth"></account-detail>
       <account-month  v-else              :selectedMonth="selectedMonth" @date-clicked="dateClicked" @balance-changed="balanceClicked"></account-month>
@@ -41,16 +27,6 @@ export default Vue.extend({
     };
   },
   created: function() {
-    var nowDate = new Date();
-    for (let index = -6; index <= 6; index++) {
-      var targetDate = moment(nowDate).add(index, "months");
-      this.months.push({
-        value: targetDate.format("YYYY-MM"),
-        text: targetDate.format("YYYY-MM")
-      });
-    }
-
-    this.selectedMonth = moment(nowDate).format("YYYY-MM");
     var self = this;
     axios.get("./settings").then(value => (self.settings = value.data));
   },
