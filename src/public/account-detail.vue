@@ -32,6 +32,7 @@
 import Vue from "vue";
 import moment from "moment";
 import axios from "axios";
+import router from "./router";
 
 export default Vue.extend({
   data() {
@@ -48,30 +49,23 @@ export default Vue.extend({
       type: 10,
       account: 500,
       amount: 0,
-      selectedDate:null
+      selectedDate: null
     };
   },
   props: ["settings"],
-  watch: {
-    selectedDate: function() {
-      this.initial();
-      this.show();
-    }
-  },
+  watch: { $route: "show" },
   computed: {
     title: function() {
       return this.selectedDate;
     }
   },
   created: function() {
-    var value:string = this.$route.path;
-    value = value.substring(1);
-    this.selectedDate = value.replace(/\//g, '-');
+    this.show();
   },
   methods: {
     regist: function() {
       var value;
-      if(this.account >= 500) {
+      if (this.account >= 500) {
         value = this.amount * -1;
       } else {
         value = this.amount;
@@ -85,9 +79,7 @@ export default Vue.extend({
       };
 
       var self = this;
-      axios.put("./details", data).then(value => {
-        self.show();
-      });
+      axios.put("./details", data).then(value => self.show());
     },
     deleteDetail: function(value: any) {
       var self = this;
@@ -100,13 +92,16 @@ export default Vue.extend({
       this.mount = 0;
     },
     show: function() {
+      var value: string = this.$route.path;
+      value = value.substring(1);
+      this.selectedDate = value.replace(/\//g, "-");
       var self = this;
       axios.get("./details?date=" + this.selectedDate).then(value => {
         self.items = value.data;
       });
     },
     back: function() {
-      this.$route.push(this.selectedDate.substring());
+      router.push(this.$route.path.substring(0, 8));
     },
     getTypeName: function(value: any) {
       for (let index = 0; index < this.settings.types.length; index++) {
@@ -134,8 +129,8 @@ export default Vue.extend({
 }
 
 .custom-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 </style>
  

@@ -42,22 +42,19 @@ export default Vue.extend({
   props: ["settings"],
   computed: {
     title: function() {
-      return this.selectedMonth;
+      this.selectedMonth;
     }
   },
-  watch: {
-    selectedMonth: function() {
-      this.show();
-    }
-  },
+  watch: { $route: "show" },
   created: function() {
-    var value: string = this.$route.path;
-    value = value.substring(1);
-    this.selectedMonth = value.replace(/\//g, "-");
+    this.show();
   },
-
   methods: {
     show: function() {
+      var value: string = this.$route.path;
+      value = value.substring(1);
+      this.selectedMonth = value.replace(/\//g, "-");
+
       var self = this;
       var url = "./days?month=" + this.selectedMonth;
       axios.get(url).then(value => {

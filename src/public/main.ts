@@ -22,7 +22,6 @@ const app = new Vue({
         selectedMonth: null,
         selectedDate: null,
         balance: 0
-
     },
     created: function () {
         var self = this;
@@ -37,6 +36,9 @@ const app = new Vue({
         },
         dateChanged:function(value:string) {
             this.selectedDate = value;
+        },
+        balanceClicked: function(value: number) {
+            this.balance = value;
         }
     }
 }).$mount('#app')
