@@ -13,7 +13,9 @@
     {"value": 512, "group": 510, "text": "通信"},
     {"value": 520, "group": 520, "text": "娯楽"},
     {"value": 521, "group": 520, "text": "被服"},
-    {"value": 530, "group": 530, "text": "臨時"}
+    {"value": 530, "group": 530, "text": "臨時"},
+    {"value": 990, "group": 990, "text": "定払"},
+    {"value": 991, "group": 991, "text": "貯蓄"}
 ],
 "groups":[
     {"value": 100, "text": "収入"},

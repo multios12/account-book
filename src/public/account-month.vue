@@ -1,7 +1,7 @@
 <template>
   <b-card id="listCard" header-tag="header">
       <h4 slot="header" class="mb-0">
-      {{title}}
+      {{selectedMonth}}
       </h4>
     <div class="row">
       <div class="col-lg-4">
@@ -20,6 +20,7 @@
         </b-table>
       </div>
     </div>
+    <app-status :selected-month="selectedMonth" :settings="settings"></app-status>
   </b-card>
 </template>
 
@@ -27,6 +28,7 @@
 import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
+import statusComponent from "./account-status.vue";
 import router from "./router";
 
 export default Vue.extend({
@@ -39,6 +41,7 @@ export default Vue.extend({
       selectedMonth: null
     };
   },
+  components: { "app-status": statusComponent },
   props: ["settings"],
   computed: {
     title: function() {
