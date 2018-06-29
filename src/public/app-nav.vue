@@ -12,6 +12,9 @@
         <router-link to="/saving" class="btn btn-secondary">savings</router-link>
       </b-navbar-nav>
       <b-navbar-nav is-nav class="float-left">
+        <router-link to="/saving" class="btn btn-secondary">saving</router-link>
+      </b-navbar-nav>
+      <b-navbar-nav is-nav class="float-left">
         <router-link to="/today" class="btn btn-secondary">today</router-link>
       </b-navbar-nav>
     </nav>    

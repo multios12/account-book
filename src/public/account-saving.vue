@@ -1,7 +1,7 @@
 <template>
     <b-card id="listCard" header-tag="header">
       <h4 slot="header" class="mb-0">
-      <b-button @click="back"><i class="fas fa-arrowg-left"></i></b-button>
+      <b-button @click="back"><i class="fas fa-arrow-left"></i></b-button>
       savings
       </h4>
       <b-card>
