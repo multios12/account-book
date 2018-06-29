@@ -1,0 +1,102 @@
+<template>
+    <b-card id="listCard" header-tag="header">
+      <h4 slot="header" class="mb-0">
+      <b-button @click="back"><i class="fas fa-arrow-left"></i></b-button>
+      savings
+      </h4>
+      <b-card>
+        <b-form inline>
+          <b-form-group>
+            <b-form-input type="date" />
+          </b-form-group>
+          <b-form-group>
+            <b-form-radio-group
+                          buttons
+                          button-variant="outline-primary"
+                          v-model="item.selected"
+                          :options="actions" />
+          </b-form-group><br class="visible-xs-block">
+          <b-form-group>
+            <b-form-radio-group id="btnradios2"
+                          buttons
+                          button-variant="outline-primary"
+                          v-model="item.selected"
+                          :options="types" />
+          </b-form-group><br class="visible-xs-block">
+            <b-input-group>
+                <b-form-input  type="number" v-model="item.amount" placeholder="amount"></b-form-input>
+            </b-input-group>
+            <b-button variant="primary" size="sm" @click="regist" >regist</b-button>
+        </b-form>
+      </b-card>
+      <b-table small :fields="fields" :items="items">
+        <template slot="typeColumn" slot-scope="data">{{getTypeName(data.item.type)}}</template>
+        <template slot="deleteColumn" slot-scope="data">
+          <b-button variant="secondary" size="sm" @click="deleteSaving(data.item.id)">削除</b-button>
+        </template>
+      </b-table>
+    </b-card>
+</template>
+<script lang="ts">
+import Vue from "vue";
+import axios from "axios";
+import router from "./router";
+
+export default Vue.extend({
+  data() {
+    return {
+      seelected: null,
+      item: {},
+      actions: [{ text: "from", value: 1 }, { text: "to", value: -1 }],
+      types: [
+        { text: "cash", value: "cash" },
+        { text: "bank", value: "bank" },
+        { text: "credit", value: "credit" }
+      ],
+      fields: [
+        { key: "date", label: "日付" },
+        { key: "typeColumn", label: "種別", sortable: true },
+        { key: "amount", label: "金額", sortable: true },
+        { key: "deleteColumn", label: "" }
+      ]
+    };
+  },
+  created: function() {
+    this.show();
+  },
+  methods: {
+    regist: function() {
+      var value;
+      if (this.account >= 500) {
+        value = this.amount * -1;
+      } else {
+        value = this.amount;
+      }
+
+      var self = this;
+      axios.put("./details", this.data).then(value => self.show());
+    },
+    deleteDetail: function(value: any) {
+      var self = this;
+      axios.delete("./details?id=" + value).then(value => self.show());
+    },
+    back: function() {
+      router.push("/");
+    },
+    show: function() {
+      this.selectedDate = this.$route.path.substring(1).replace(/\//g, "-");
+      var self = this;
+      axios
+        .get("./savings?date=" + this.selectedDate)
+        .then(value => (self.items = value.data));
+    },
+    getTypeName: function(value: any) {
+      for (let index = 0; index < this.settings.types.length; index++) {
+        if (this.settings.types[index].value == value) {
+          return this.settings.types[index].text;
+        }
+      }
+    }
+  }
+});
+</script>

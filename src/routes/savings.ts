@@ -13,26 +13,17 @@ router.get('/', (req, res, next) => {
             return;
         }
 
-        var sql = 'SELECT * FROM details WHERE date = ?';
-        db.all(sql, [req.query.date], (err: any, rows: any) => res.send(rows));
+        var sql = 'SELECT * FROM savings WHERE date = ? ORDER BY date DESC';
+        db.all(sql, [req.query.date], (err: any, rows: any) => {
+            res.send(rows);
+        });
     });
 });
 
 router.put('/', (req, res, next) => {
     db.serialize(() => {
-        const statement = db.prepare('INSERT INTO details (date, type, account, amount) VALUES (?, ?, ?, ?)');
+        const statement = db.prepare('INSERT INTO savings (date, type, account, amount) VALUES (?, ?, ?, ?)');
         statement.run(req.body.date, req.body.type, req.body.account, req.body.amount);
-        statement.finalize();
-        res.status(200);
-        res.send('ok');
-    });
-});
-
-router.post('/', (req, res, next) => {
-    db.serialize(() => {
-        // 詳細テーブル更新
-        const statement = db.prepare('UPDATE details SET date = ? , item = ?, amount = ? WHERE id = ?');
-        statement.run(req.body.date, req.body.item, req.body.amount, req.body.id);
         statement.finalize();
         res.status(200);
         res.send('ok');
@@ -41,7 +32,7 @@ router.post('/', (req, res, next) => {
 
 router.delete('/', (req, res, next) => {
     db.serialize(() => {
-        const statement = db.prepare('DELETE FROM details WHERE id = ?');
+        const statement = db.prepare('DELETE FROM savings WHERE id = ?');
         statement.run(req.query.id);
         statement.finalize();
         res.status(200);
