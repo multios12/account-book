@@ -9,9 +9,11 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
 
 // SQL作成
-var sql = "CREATE TABLE IF NOT EXISTS details ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `account` INTEGER, `amount` NUMERIC DEFAULT 0 )";
+var sqlCreateDetails = "CREATE TABLE IF NOT EXISTS details ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `account` INTEGER, `amount` NUMERIC DEFAULT 0 )";
+var sqlCreateSavings = "CREATE TABLE IF NOT EXISTS savings ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `amount` NUMERIC DEFAULT 0 ) "
 db.serialize(() => {
-  db.run(sql);
+  db.run(sqlCreateDetails);
+  db.run(sqlCreateSavings);
 });
 
 /**

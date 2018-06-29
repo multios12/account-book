@@ -1,16 +1,22 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <b-navbar-brand class="navbar-brand" href="/">account-book</b-navbar-brand>
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" />
+          <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" class="mr-1" />
         </b-navbar-nav>
           <b-nav-text> 残高{{balance}}</b-nav-text>
       </b-collapse>
+      <b-navbar-nav is-nav class="mr-1 float-left">
+        <router-link to="/saving" class="btn btn-secondary">savings</router-link>
+      </b-navbar-nav>
+      <b-navbar-nav is-nav class="float-left">
+        <router-link to="/saving" class="btn btn-secondary">saving</router-link>
+      </b-navbar-nav>
       <b-navbar-nav is-nav class="float-left">
         <router-link to="/today" class="btn btn-secondary">today</router-link>
       </b-navbar-nav>
-      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     </nav>    
 </template>
 

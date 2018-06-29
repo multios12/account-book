@@ -12,10 +12,9 @@ router.get('/', (req, res, next) => {
             res.send('err');
             return;
         }
-        db.all('SELECT * FROM details WHERE date = ?', [req.query.date], (err: any, rows: any) => {
-            console.log(rows);
-            res.send(rows);
-        });
+
+        var sql = 'SELECT * FROM details WHERE date = ?';
+        db.all(sql, [req.query.date], (err: any, rows: any) => res.send(rows));
     });
 });
 
