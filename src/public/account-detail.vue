@@ -15,7 +15,7 @@
             <b-input-group  class="mb-2 mr-sm-2 mb-sm-0">
                 <b-form-input  type="number" v-model="amount" placeholder="金額"></b-form-input>
             </b-input-group>
-            <b-button variant="primary" size="sm" @click="regist" >登録</b-button>
+            <b-button variant="primary" size="sm" @click="regist" >regist</b-button>
         </b-form>
       </b-card>
       <b-table small :fields="fields" :items="items">
