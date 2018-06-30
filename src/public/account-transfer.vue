@@ -34,7 +34,13 @@
         <b-row class="my-1">
           <b-col sm="3"><label for="amountInput">amount</label></b-col>
           <b-col sm="9">
-            <b-form-input id="amountInput" type="number" v-model="item.amount" placeholder="amount" class="mr-1"></b-form-input>
+            <b-form-input id="amountInput" type="number" v-model="item.amount" class="mr-1"></b-form-input>
+          </b-col>
+        </b-row>
+        <b-row class="my-1">
+          <b-col sm="3"><label for="feeInput">fee</label></b-col>
+          <b-col sm="9">
+            <b-form-input id="feeInput" type="number" v-model="item.fee" class="mr-1"></b-form-input>
           </b-col>
         </b-row>
       </b-container>
@@ -55,8 +61,10 @@ export default Vue.extend({
     return {
       item: {
         date: moment(new Date()).format("YYYY-MM-DD"),
-        from:20,to:10,
-        amount: 0
+        from: 20,
+        to: 10,
+        amount: 0,
+        fee: 0
       },
       froms: [{ text: "cash", value: 10 }, { text: "bank", value: 20 }],
       tos: [
@@ -72,29 +80,37 @@ export default Vue.extend({
   },
   methods: {
     regist: function() {
-      this.item.amount = this.item.amount * this.item.action;
-
       var self = this;
-      axios.put("./savings", this.item).then(value => {
-        var v = {
-          date: self.item.date,
-          type: self.item.type,
-          account: 991,
-          amount: self.item.amount * -1
-        };
-        axios.put("./details", v);
-        self.show();
+      var v = [
+        {
+          date: this.item.date,
+          type: this.item.from,
+          account: 980,
+          amount: this.item.amount * -1
+        },
+        {
+          date: this.item.date,
+          type: this.item.to,
+          account: 980,
+          amount: this.item.amount
+        }
+      ];
+      if(this.item.fee > 0) {
+        v.push({
+          date: this.item.date,
+          type: this.item.from,
+          account: 981,
+          amount: this.item.fee * -1
+        });
+      }
+
+      axios.put("./details", v).then(value => {
+        var p = moment(this.item.date).format("/YYYY/MM/DD");
+        router.push(p);
       });
     },
     back: function() {
       router.push("/");
-    },
-    getTypeName: function(value: any) {
-      for (let index = 0; index < this.settings.types.length; index++) {
-        if (this.settings.types[index].value == value) {
-          return this.settings.types[index].text;
-        }
-      }
     }
   }
 });
