@@ -22,7 +22,7 @@
         <template slot="typeColumn" slot-scope="data">{{getTypeName(data.item.type)}}</template>
         <template slot="accountColumn" slot-scope="data">{{getAccountName(data.item.account)}}</template>
         <template slot="deleteColumn" slot-scope="data">
-          <b-button variant="secondary" size="sm" @click="deleteDetail(data.item.id)">削除</b-button>
+          <b-button variant="secondary" size="sm" @click="deleteDetail(data.item.id)">delete</b-button>
         </template>
       </b-table>
     </b-card>

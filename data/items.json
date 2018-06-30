@@ -14,6 +14,8 @@
     {"value": 520, "group": 520, "text": "娯楽"},
     {"value": 521, "group": 520, "text": "被服"},
     {"value": 530, "group": 530, "text": "臨時"},
+    {"value": 980, "group": 980, "text": "振替"},
+    {"value": 981, "group": 980, "text": "手数"},
     {"value": 990, "group": 990, "text": "定払"},
     {"value": 991, "group": 991, "text": "貯蓄"}
 ],

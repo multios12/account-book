@@ -19,9 +19,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.put('/', (req, res, next) => {
+
     db.serialize(() => {
         const statement = db.prepare('INSERT INTO details (date, type, account, amount) VALUES (?, ?, ?, ?)');
-        statement.run(req.body.date, req.body.type, req.body.account, req.body.amount);
+        var values = Array.isArray(req.body) ? req.body : [req.body];
+        values.forEach(v => statement.run(v.date, v.type, v.account, v.amount));
         statement.finalize();
         res.status(200);
         res.send('ok');
