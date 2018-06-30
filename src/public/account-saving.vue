@@ -7,24 +7,26 @@
       <b-card>
         <b-form inline>
           <b-form-group>
-            <b-form-input type="date" v-model="item.date" />
+            <b-form-input type="date" v-model="item.date" class="mr-1" />
           </b-form-group>
           <b-form-group>
             <b-form-radio-group
                           buttons
                           button-variant="outline-primary"
                           v-model="item.action"
-                          :options="actions" />
+                          :options="actions" 
+                          class="mr-1"/>
           </b-form-group><br class="visible-xs-block">
           <b-form-group>
             <b-form-radio-group id="btnradios2"
                           buttons
                           button-variant="outline-primary"
                           v-model="item.type"
-                          :options="types" />
-          </b-form-group><br class="visible-xs-block">
+                          :options="types" 
+                          class="mr-1"/>
+          </b-form-group>
             <b-input-group>
-                <b-form-input  type="number" v-model="item.amount" placeholder="amount"></b-form-input>
+                <b-form-input  type="number" v-model="item.amount" placeholder="amount" class="mr-1"></b-form-input>
             </b-input-group>
             <b-button variant="primary" size="sm" @click="regist" >regist</b-button>
         </b-form>
