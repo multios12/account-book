@@ -1,6 +1,6 @@
 <template>
-  <b-card id="listCard" header-tag="header" footer-tag="footer">
-    <h4 slot="header" class="mb-0">
+  <b-card id="listCard" header-tag="header" class="mx-1">
+    <h4 slot="header" class="mb-2">
       <b-button @click="back"><i class="fas fa-arrow-left"></i></b-button>
         transfer
       </h4>
@@ -43,10 +43,8 @@
             <b-form-input id="feeInput" type="number" v-model="item.fee" class="mr-1"></b-form-input>
           </b-col>
         </b-row>
-      </b-container>
-      <b-input-group slot="footer">
         <b-button variant="primary" size="sm" @click="regist" >regist</b-button>
-      </b-input-group>
+      </b-container>
     </b-card>
 </template>
 
