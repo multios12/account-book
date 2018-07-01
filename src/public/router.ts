@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import monthComponent from './account-month.vue';
-import detailComponent from './account-detail.vue';
-import savingComponent from './account-saving.vue';
-import transferComponent from './account-transfer.vue';
+import monthComponent from './components/page-month-list.vue';
+import detailComponent from './components/page-detail.vue';
+import savingComponent from './components/page-saving.vue';
+import transferComponent from './components/page-transfer.vue';
 import moment from 'moment';
 
 Vue.use(VueRouter);

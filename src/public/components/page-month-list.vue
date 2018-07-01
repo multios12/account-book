@@ -28,8 +28,8 @@
 import Vue from "vue";
 import axios from "axios";
 import moment from "moment";
-import statusComponent from "./account-status.vue";
-import router from "./router";
+import statusComponent from "./parts-month-status.vue";
+import router from "../router";
 
 export default Vue.extend({
   data() {

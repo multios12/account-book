@@ -8,7 +8,7 @@ import axios from "axios";
 import './bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import navComponent from './app-nav.vue';
+import navComponent from './components/app-nav.vue';
 import router from './router'
 
 //Vue.use(VueRouter);
