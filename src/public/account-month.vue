@@ -1,5 +1,5 @@
 <template>
-  <b-card id="listCard" header-tag="header">
+  <b-card id="listCard" header-tag="header" class="mx-1">
       <h4 slot="header" class="mb-0">
       {{selectedMonth}}
       </h4>
