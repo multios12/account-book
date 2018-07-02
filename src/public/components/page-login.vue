@@ -2,7 +2,7 @@
   <div class="row">
   <b-card id="loginCard" header-tag="header" style="col-mb-2" class="mx-auto">
     <h6 slot="header" variant="info">
-      Sign
+      Sign in
       <!--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>-->
     </h6>
 
@@ -58,10 +58,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
-  
-})
+import Vue from "vue";
+export default Vue.extend({});
 </script>
 
 

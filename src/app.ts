@@ -1,6 +1,8 @@
 import express, { NextFunction } from 'express';
 import fs from 'fs';
+import passport from './node-passport';
 import path from 'path';
+var session = require("express-session");
 // import compression from "compression";
 var createError = require('http-errors');
 //var cookieParser = require('cookie-parser');
@@ -25,6 +27,13 @@ if (app.get('env') == 'development') {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+//#region passport
+// passport設定
+app.use(session({ secret: "some salt", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+//#endregion
 
 app.use('/', require('./routes/index'));
 app.use('/days', require('./routes/days'));
