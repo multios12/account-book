@@ -1,5 +1,5 @@
 <template>
-    <b-card id="listCard" header-tag="header">
+    <b-card id="listCard" header-tag="header" class="mx-1">
       <h4 slot="header" class="mb-0">
       <b-button @click="back"><i class="fas fa-arrow-left"></i></b-button>
       {{title}}
@@ -32,7 +32,7 @@
 import Vue from "vue";
 import moment from "moment";
 import axios from "axios";
-import router from "./router";
+import router from "../router";
 
 export default Vue.extend({
   data() {

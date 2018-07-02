@@ -24,7 +24,7 @@
 import Vue from "vue";
 import moment from "moment";
 import axios from "axios";
-import router from "./router";
+import router from "../router";
 
 export default Vue.extend({
   data() {
