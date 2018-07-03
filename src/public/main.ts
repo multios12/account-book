@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import BootstrapVue from 'bootstrap-vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import BootstrapVue from 'bootstrap-vue';
 import moment from "moment";
 import axios from "axios";
 
 // import 'bootstrap/dist/css/bootstrap.css'
-import './bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import './bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import navComponent from './components/app-nav.vue';
-import router from './router'
+import router from './router';
 
 //Vue.use(VueRouter);
 Vue.use(BootstrapVue);

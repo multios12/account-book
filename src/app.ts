@@ -13,34 +13,24 @@ var app = express();
 // app.use(compression());
 app.use(logger('dev'));
 
-// browser-sync Setup 
-/*
-if (app.get('env') == 'development') {
-  var browserSync = require('browser-sync');
-  var connectBrowserSync = require('connect-browser-sync');
-
-  var browserSyncConfigurations = { "files": path.join(__dirname, "../views/*") };
-  app.use(connectBrowserSync(browserSync(browserSyncConfigurations)));
-}
-*/
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
-
 //#region passport
 // passport設定
-app.use(session({ secret: "some salt", resave: true, saveUninitialized: true }));
+app.use(session({ secret: "xoziphOcirazEfeThoTrlzot0eWisotiTeGeVavl", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 //#endregion
 
+//#region routings
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/days', require('./routes/days'));
 app.use('/details', require('./routes/details'));
 app.use('/settings', require('./routes/settings'));
 app.use('/status', require('./routes/status'));
 app.use('/savings', require('./routes/savings'));
+//#endregion
 
 app.use(function (next: Function) { next(createError(404)) });
 

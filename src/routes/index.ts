@@ -7,13 +7,13 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', (req, res, next) => res.sendfile('../public/index.html'));
 
-router.post("/account/login", passport.authenticate(
+router.post("/login", passport.authenticate(
     "local-login", {successRedirect: "/", failureRedirect: "/login"
     }));
 
-router.post("/account/logout", authorize("group1"), function (request, response) {
+router.post("/logout", authorize("group1"), function (request, response) {
     request.logout();
-    response.redirect("/home/index");
+    response.redirect("/");
 });
 
 module.exports = router;

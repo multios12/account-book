@@ -1,5 +1,8 @@
 import passport from 'passport';
+import path from 'path';
 var LocalStrategy = require("passport-local").Strategy;
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
 
 //#region passport
 // passport が ユーザー情報をシリアライズすると呼び出されます
@@ -11,11 +14,9 @@ passport.serializeUser(function (id, done) {
 passport.deserializeUser(function (id, done) {
     if (true) {
         return done('');
-
     } else {
         // 結果
         done(null, { user: '' });
-
     }
 });
 
@@ -28,16 +29,19 @@ passport.use(
         passReqToCallback: true
     }, function (request: any, username: any, password: any, done: any) {
         process.nextTick(() => {
-            // User.findOne({ "email": username }, function (error, user) {
-            //     if (error) {
-            //         return done(error);
-            //     }
-            //     if (!user || user.password != password) {
-            //         return done(null, false, request.flash("message", "Invalid username or password."));
-            //     }
-            //     // 保存するデータは必要最低限にする
-            //     return done(null, user._id);
-            // });
+            db.serialize(() => {
+                var sql = 'SELECT * FROM users WHERE name = ?';
+                db.get(sql, [username], (err: any, rows: any) => {
+                    if (err) {
+                        return done(err);
+                    }
+                    if (!rows || rows.password != password) {
+                        return done(null, false, request.flash("message", "Invalid username or password."));
+                    }
+                    // 保存するデータは必要最低限にする
+                    return done(null, rows.id);
+                });
+            });
         });
     })
 );

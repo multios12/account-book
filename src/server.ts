@@ -9,10 +9,10 @@ const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
 
 // SQL作成
-var sqlCreateDetails = "CREATE TABLE IF NOT EXISTS details ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `account` INTEGER, `amount` NUMERIC DEFAULT 0 )";
-var sqlCreateSavings = "CREATE TABLE IF NOT EXISTS savings ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `amount` NUMERIC DEFAULT 0 ) ";
-var sqlCreateUsers   = "CREATE TABLE IF NOT EXISTS users   ( `id`	INTEGER NOT NULL UNIQUE,`email`	TEXT NOT NULL,`name`	TEXT NOT NULL,`password`	TEXT NOT NULL,`role`	TEXT NOT NULL DEFAULT 'group1',PRIMARY KEY(`id`));";
 db.serialize(() => {
+  var sqlCreateDetails = "CREATE TABLE IF NOT EXISTS details ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `account` INTEGER, `amount` NUMERIC DEFAULT 0 )";
+  var sqlCreateSavings = "CREATE TABLE IF NOT EXISTS savings ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `amount` NUMERIC DEFAULT 0 ) ";
+  var sqlCreateUsers   = "CREATE TABLE IF NOT EXISTS users   ( `id`	INTEGER NOT NULL UNIQUE,`email`	TEXT NOT NULL,`name`	TEXT NOT NULL,`password`	TEXT NOT NULL,`role`	TEXT NOT NULL DEFAULT 'group1',PRIMARY KEY(`id`));";
   db.run(sqlCreateDetails);
   db.run(sqlCreateSavings);
   db.run(sqlCreateUsers);
