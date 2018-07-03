@@ -1,4 +1,5 @@
 import express, { NextFunction } from 'express';
+import flash from 'express-flash';
 import fs from 'fs';
 import passport from './node-passport';
 import path from 'path';
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 //#region passport
 // passport設定
 app.use(session({ secret: "xoziphOcirazEfeThoTrlzot0eWisotiTeGeVavl", resave: true, saveUninitialized: true }));
+app.use(flash);
 app.use(passport.initialize());
 app.use(passport.session());
 //#endregion

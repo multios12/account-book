@@ -1,5 +1,7 @@
+import express, { NextFunction } from 'express';
 import passport from 'passport';
 import path from 'path';
+// import { NextFunction } from 'express-serve-static-core';
 var LocalStrategy = require("passport-local").Strategy;
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
@@ -27,7 +29,7 @@ passport.use(
         usernameField: "username",
         passwordField: "password",
         passReqToCallback: true
-    }, function (request: any, username: any, password: any, done: any) {
+    }, function (request: express.Request, username: String, password: String, done: any) {
         process.nextTick(() => {
             db.serialize(() => {
                 var sql = 'SELECT * FROM users WHERE name = ?';
@@ -53,7 +55,7 @@ export var authorize = function (role: any) {
             request.user.role === role) {
             return next();
         }
-        response.redirect("/login");
+        response.redirect("/#/login");
     };
 };
 //#endregion

@@ -9,7 +9,7 @@
     <b-card-body>
       <b-alert style="display:none" id="login-alert" variant="danger" class="col-sm-12" />
 
-      <form id="loginform" class="form-horizontal" role="form">
+      <form id="loginform" name="loginform" class="form-horizontal" method="POST" action="/login" role="form">
         <div style="margin-bottom: 25px" class="input-group">
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-user"></i>
@@ -35,8 +35,9 @@
         <div style="margin-top:10px" class="form-group">
           <!-- Button -->
 
+
           <div class="col-sm-12 controls">
-            <a id="btn-login" href="#" class="btn btn-success">Login </a>
+            <a id="btn-login" href="javascript:loginform.submit()" class="btn btn-success">Login </a>
             <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Google</a>
           </div>
         </div>
