@@ -17,6 +17,11 @@
       <b-navbar-nav is-nav class="float-left">
         <router-link to="/today" class="btn btn-secondary">today</router-link>
       </b-navbar-nav>
+      <b-navbar-nav is-nav class="float-left">
+        <form name="logoutform" method="POST" action="/logout" role="form">
+        <a href="javascript:logoutform.submit()">logout</a>
+        </form>
+      </b-navbar-nav>
     </nav>    
 </template>
 
@@ -43,21 +48,29 @@ export default Vue.extend({
         text: targetDate.format("YYYY-MM")
       });
     }
-    this.changeMonthToNow();
+    this.selectedMonth = moment(new Date()).format("YYYY-MM");
   },
   methods: {
     changeMonth: function(value: any) {
       this.selectedMonth = value;
+      console.log("changeMonth");
       router.push(moment(value + "-01").format("/YYYY/MM"));
     },
     changeMonthToNow: function() {
       this.selectedMonth = moment(new Date()).format("YYYY-MM");
+      console.log("changeMonthToNow");
       router.push(moment(new Date()).format("/YYYY/MM"));
     },
     dateClicked: function(targetdate: string) {
       var d = moment(new Date());
       var p = d.format("/YYYY/MM/DD");
+      console.log("dateClicked");
       router.push(p);
+    },
+    logout: function() {
+      axios.post("./logout").then(value => {
+        router.push("/login");
+      });
     }
   }
 });

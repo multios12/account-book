@@ -16,12 +16,12 @@ passport.serializeUser(function (id, done) {
 // passport が ユーザー情報をデシリアライズすると呼び出されます
 passport.deserializeUser(function (id, done) {
     done(null, { user: id });
-    if (true) {
-        return done('');
-    } else {
-        // 結果
-        done(null, { user: id });
-    }
+    db.serialize(() => {
+        var sql = 'SELECT * FROM users WHERE id = ?';
+        db.get(sql, [id], (err: any, user: any) => {
+            done(err, user);
+        });
+    });
 });
 
 // passport における具体的な認証処理を設定します。
@@ -34,10 +34,10 @@ passport.use(new LocalStrategy(
                     return done(err);
                 }
                 if (!rows || rows.password != password) {
-                    //return done(null, false, request.flash("message", "Invalid username or password."));
+                    return done(null, false, { message: 'パスワードが正しくありません。' });
                 }
                 // 保存するデータは必要最低限にする
-                return done(null, 'a');
+                return done(null, rows.id);
             });
         });
     })

@@ -10,7 +10,12 @@ import moment from 'moment';
 
 Vue.use(VueRouter);
 var routes: any = [
-    { path: '/', redirect: (to: any) => moment(new Date()).format("/YYYY/MM") },
+    { path: '/', redirect: (to: any) =>{
+        if(to.path == '/login') {
+            return '/login';
+        }
+        return moment(new Date()).format("/YYYY/MM");
+    }},
     { path: '/:year/:month', component: monthComponent },
     { path: '/:year/:month/:day', component: detailComponent },
     { path: '/login', component: loginComponent},
@@ -19,4 +24,7 @@ var routes: any = [
     { path: '/today', redirect: (to: any) => moment(new Date()).format("/YYYY/MM/DD") },
 ];
 
-export default new VueRouter({ routes: routes });
+var router = new VueRouter({ routes: routes });
+
+
+export default router;
