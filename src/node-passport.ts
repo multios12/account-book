@@ -1,8 +1,9 @@
 import express, { NextFunction } from 'express';
 import passport from 'passport';
+import passportLocal from 'passport-local'
 import path from 'path';
 // import { NextFunction } from 'express-serve-static-core';
-var LocalStrategy = require("passport-local").Strategy;
+var LocalStrategy = passportLocal.Strategy;
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
 
@@ -14,35 +15,29 @@ passport.serializeUser(function (id, done) {
 
 // passport が ユーザー情報をデシリアライズすると呼び出されます
 passport.deserializeUser(function (id, done) {
+    done(null, { user: id });
     if (true) {
         return done('');
     } else {
         // 結果
-        done(null, { user: '' });
+        done(null, { user: id });
     }
 });
 
 // passport における具体的な認証処理を設定します。
-passport.use(
-    "local-login",
-    new LocalStrategy({
-        usernameField: "username",
-        passwordField: "password",
-        passReqToCallback: true
-    }, function (request: express.Request, username: String, password: String, done: any) {
-        process.nextTick(() => {
-            db.serialize(() => {
-                var sql = 'SELECT * FROM users WHERE name = ?';
-                db.get(sql, [username], (err: any, rows: any) => {
-                    if (err) {
-                        return done(err);
-                    }
-                    if (!rows || rows.password != password) {
-                        return done(null, false, request.flash("message", "Invalid username or password."));
-                    }
-                    // 保存するデータは必要最低限にする
-                    return done(null, rows.id);
-                });
+passport.use(new LocalStrategy(
+    function (username, password, done) {
+        db.serialize(() => {
+            var sql = 'SELECT * FROM users WHERE name = ?';
+            db.get(sql, [username], (err: any, rows: any) => {
+                if (err) {
+                    return done(err);
+                }
+                if (!rows || rows.password != password) {
+                    //return done(null, false, request.flash("message", "Invalid username or password."));
+                }
+                // 保存するデータは必要最低限にする
+                return done(null, 'a');
             });
         });
     })
