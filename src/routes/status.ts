@@ -1,16 +1,12 @@
+import db from '../db';
 import express from 'express';
 import path from 'path';
 import moment from 'moment';
 
 var router = express.Router();
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
 
 router.get('/', (req, res, next) => {
-    db.serialize(() => {
-        if (!req.query.month) {
-            return;
-        }
+    if (!req.query.month) return;
 
         var startDate = new Date(req.query.month + '-1');
         var endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
@@ -22,7 +18,6 @@ router.get('/', (req, res, next) => {
             db.all(sql, [startMoment, endMoment], (err: any, rows: any) => {
                 var values: any[] = asdate(rows);
                 res.send(values);
-            });
         });
     });
 });
