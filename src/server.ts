@@ -1,46 +1,22 @@
 #!/usr/bin/env node
 import http from 'http';
-import path from 'path';
 
 var app = require('./app');
 var debug = require('debug')('bootstraptemplate:server');
 
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database(path.join(process.cwd(), './data/db.sqlite'));
-
-// SQL作成
-var sqlCreateDetails = "CREATE TABLE IF NOT EXISTS details ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `account` INTEGER, `amount` NUMERIC DEFAULT 0 )";
-var sqlCreateSavings = "CREATE TABLE IF NOT EXISTS savings ( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, `date` TEXT, `type` INTEGER, `amount` NUMERIC DEFAULT 0 ) "
-db.serialize(() => {
-  db.run(sqlCreateDetails);
-  db.run(sqlCreateSavings);
-});
-
-/**
- * Get port from environment and store in Express.
- */
-
+/** Get port from environment and store in Express. */
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
+/** Create HTTP server. */
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
-
+/** Listen on provided port, on all network interfaces. */
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Normalize a port into a number, string, or false.
- */
-
+/** Normalize a port into a number, string, or false. */
 function normalizePort(val: string) {
   var port = parseInt(val, 10);
 
@@ -57,10 +33,7 @@ function normalizePort(val: string) {
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
-
+/** Event listener for HTTP server "error" event. */
 function onError(error: any) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -85,10 +58,7 @@ function onError(error: any) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
-
+/** Event listener for HTTP server "listening" event. */
 function onListening() {
   var addr = server.address();
   var bind = typeof addr === 'string'
