@@ -4,8 +4,12 @@
         <b-button @click="back"><i class="fas fa-arrow-left"></i></b-button>
         reports[{{selectedMonth}}]
       </h4>
-      <canvas id="balanceChart" class="w-50 mx-auto"></canvas>
-
+      <div class="row">
+      <div class="col-0 col-sm-0 col-md-2 col-lg-3 col-xl-3"></div>
+      <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6">
+        <canvas id="balanceChart" class="mx-auto"></canvas>
+      </div>
+      </div>
       <div class="row">
         <div class="col-lg-6">
           <b-card title="収入">
@@ -24,7 +28,12 @@
       </div>
 
       <b-card title="支出内訳">
-        <canvas id="spendingsChart" ></canvas>
+        <div class="row">
+        <div class="col-0 col-sm-0 col-md-1 col-lg-1 col-xl-1"></div>
+        <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
+          <canvas id="spendingsChart" ></canvas>
+        </div>
+        </div>
       </b-card>
     </b-card>
 </template>
@@ -81,12 +90,20 @@ export default Vue.extend({
       this.incomes.forEach((e: any) => (income += e.amount));
       this.spendings.forEach((e: any) => (spending += e.amount * -1));
 
-      var options = { maintainAspectRatio: false, responsive: false, legend: { display: false }, };
+      var options = {
+        legend: { display: false },
+        scales: { xAxes: [{ ticks: { beginAtZero: true, min: 0 } }] }
+      };
       var balanceChart = new chart("balanceChart", {
         type: "horizontalBar",
         data: {
           labels: ["収入", "支出"],
-          datasets: [{ data: [income, spending] }]
+          datasets: [
+            {
+              data: [income, spending],
+              backgroundColor: ["#7fc2ef", "#d685b0"]
+            }
+          ]
         },
         options: options
       });
@@ -100,10 +117,35 @@ export default Vue.extend({
         values.push(e.amount * -1);
       });
 
+      var options = {
+        scales: { yAxes: [{ ticks: { beginAtZero: true, min: 0 } }] }
+      };
+
       var spendigsChart = new chart("spendingsChart", {
         type: "pie",
-        data: { labels: labels, datasets: [{backgroundColor:['#e2b2c0', '#fff353', '#a5d1f4', '#e4ad6d','#d685b0', '#dbe159', '#7fc2ef', '#c4a6ca','#eabf4c','#f9e697','#b3d3ac', '#eac7cd'], data: values,  }] }
-        //            options: options
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              backgroundColor: [
+                "#e2b2c0",
+                "#fff353",
+                "#a5d1f4",
+                "#e4ad6d",
+                "#d685b0",
+                "#dbe159",
+                "#7fc2ef",
+                "#c4a6ca",
+                "#eabf4c",
+                "#f9e697",
+                "#b3d3ac",
+                "#eac7cd"
+              ],
+              data: values
+            }
+          ]
+        }
+        //options: options
       });
     },
     back: function() {

@@ -81,7 +81,6 @@ export default Vue.extend({
   },
   props: ["settings"],
   created: function() {
-    this.show();
   },
   methods: {
     regist: function() {
