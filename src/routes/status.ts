@@ -2,23 +2,18 @@ import db from '../db';
 import express from 'express';
 import path from 'path';
 import moment from 'moment';
+import { getFirstAndLastDay } from '../modules/settingStore';
 
 var router = express.Router();
 
 router.get('/', (req, res, next) => {
     if (!req.query.month) return;
 
-        var startDate = new Date(req.query.month + '-1');
-        var endDate = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
-
-        db.serialize(() => {
-            var startMoment = moment(startDate).format('YYYY-MM-DD');
-            var endMoment = moment(endDate).format('YYYY-MM-DD');
-            var sql = 'select type,account, sum(amount) as amount from details where date >= ? AND date <= ? group by type, account';
-            db.all(sql, [startMoment, endMoment], (err: any, rows: any) => {
-                var values: any[] = asdate(rows);
-                res.send(values);
-        });
+    var dates = getFirstAndLastDay(req.query.month);
+    var sql = 'select type,account, sum(amount) as amount from details where date >= ? AND date <= ? group by type, account';
+    db.all(sql, [dates.start, dates.end], (err: any, rows: any) => {
+        var values: any[] = asdate(rows);
+        res.send(values);
     });
 });
 
