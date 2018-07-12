@@ -2,7 +2,7 @@
   <b-card id="listCard" header-tag="header" class="mx-1">
       <h4 slot="header" class="mb-0">
       {{selectedMonth}}
-        <router-link :to="$route.path + '/report'" class="btn btn-secondary">report</router-link>
+        <router-link :to="$route.path + '/report'" class="btn btn-secondary"><i class="fas fa-file-alt"></i></router-link>
       </h4>
     <div class="row">
       <div class="col-lg-4">

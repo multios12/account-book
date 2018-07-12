@@ -1,0 +1,34 @@
+{"accounts":[
+    {"value": 100, "group": 100, "text": "給与"},
+    {"value": 110, "group": 100, "text": "賞与"},
+    {"value": 120, "group": 100, "text": "雑収"},
+    {"value": 499, "group": 999, "text": "繰越"},
+
+    {"value": 500, "group": 500, "text": "食費"},
+    {"value": 501, "group": 500, "text": "日用"},
+    {"value": 502, "group": 500, "text": "家電"},
+    {"value": 503, "group": 500, "text": "交通"},
+    {"value": 510, "group": 510, "text": "住宅"},
+    {"value": 511, "group": 510, "text": "公共"},
+    {"value": 512, "group": 510, "text": "通信"},
+    {"value": 520, "group": 520, "text": "娯楽"},
+    {"value": 521, "group": 520, "text": "被服"},
+    {"value": 530, "group": 530, "text": "臨時"},
+    {"value": 980, "group": 980, "text": "振替"},
+    {"value": 981, "group": 980, "text": "手数"},
+    {"value": 990, "group": 990, "text": "定払"},
+    {"value": 991, "group": 991, "text": "貯蓄"}
+],
+"groups":[
+    {"value": 100, "text": "収入"},
+    {"value": 500, "text": "一般"},
+    {"value": 510, "text": "固定"},
+    {"value": 520, "text": "娯楽"},
+    {"value": 530, "text": "雑費"}
+],
+"types": [
+    {"value": 10, "text": "現金"},
+    {"value": 20, "text": "銀行"},
+    {"value": 30, "text": "信用"}
+]
+}

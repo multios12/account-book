@@ -6,16 +6,17 @@
         <b-navbar-nav>
           <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" class="mr-1" />
         </b-navbar-nav>
-          <b-nav-text> 残高{{balance}}</b-nav-text>
+          <b-nav-text class="mr-1"> 残高{{balance}}</b-nav-text>
       <b-navbar-nav is-nav class="mr-1 float-left">
-        <router-link to="/saving" class="btn btn-secondary">savings</router-link>
+        <router-link to="/saving" class="btn btn-secondary"><i class="fas fa-piggy-bank"></i></router-link>
       </b-navbar-nav>
       <b-navbar-nav is-nav class="mr-1 float-left">
-        <router-link to="/transfer" class="btn btn-secondary">transfer</router-link>
+        <router-link to="/transfer" class="btn btn-secondary"><i class="fas fa-exchange-alt"></i></router-link>
       </b-navbar-nav>
       </b-collapse>
       <b-navbar-nav is-nav class="float-left">
-        <router-link to="/today" class="btn btn-secondary">today</router-link>
+        <router-link to="/today" class="btn btn-secondary mr-1">today</router-link>
+        <router-link to="/settings" class="btn btn-secondary"><i class="fas fa-cog"></i></router-link>
       </b-navbar-nav>
     </nav>    
 </template>
@@ -43,7 +44,7 @@ export default Vue.extend({
         text: targetDate.format("YYYY-MM")
       });
     }
-    this.changeMonthToNow();
+    this.selectedMonth = moment(new Date()).format("YYYY-MM");
   },
   methods: {
     changeMonth: function(value: any) {
