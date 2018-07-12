@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/days', require('./routes/days'));
 app.use('/details', require('./routes/details'));
+app.use('/reports', require('./routes/reports'));
 app.use('/savings',  require('./routes/savings'));
 app.use('/settings', require('./routes/settings'));
 app.use('/status', require('./routes/status'));
