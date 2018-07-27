@@ -6,7 +6,7 @@
         <b-nav-item><router-link to="/settings/outdates">締め日</router-link></b-nav-item>
       </b-nav>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <router-view></router-view>
+        <router-view :settings="settings"></router-view>
       </main>
 		</b-row>
 	</div>

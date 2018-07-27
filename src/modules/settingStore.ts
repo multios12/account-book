@@ -18,7 +18,7 @@ export function read() {
 
 export function write() {
     var filename = path.join(process.cwd(), './data/settings.json');
-    fs.writeFileSync(filename, settings);
+    fs.writeFileSync(filename, JSON.stringify(settings));
 }
 
 export function getFirstAndLastDay(month: string) {

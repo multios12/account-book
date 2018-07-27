@@ -11,12 +11,12 @@
         <router-link to="/saving" class="btn btn-secondary"><i class="fas fa-piggy-bank"></i></router-link>
       </b-navbar-nav>
       <b-navbar-nav is-nav class="mr-1 float-left">
-        <router-link to="/transfer" class="btn btn-secondary"><i class="fas fa-exchange-alt"></i></router-link>
+        <router-link to="/transfer" class="btn btn-secondary mr-1"><i class="fas fa-exchange-alt"></i></router-link>
+        <router-link to="/settings" class="btn btn-secondary"><i class="fas fa-cog"></i></router-link>
       </b-navbar-nav>
       </b-collapse>
       <b-navbar-nav is-nav class="float-left">
         <router-link to="/today" class="btn btn-secondary mr-1">today</router-link>
-        <router-link to="/settings" class="btn btn-secondary"><i class="fas fa-cog"></i></router-link>
       </b-navbar-nav>
     </nav>    
 </template>
