@@ -1,0 +1,12 @@
+{
+    "short_name": "account book",
+    "name": "account book - 簡単な家計簿",
+    "icons": [
+        {
+            "src": "favicon.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ],
+    "start_url": "/"
+}

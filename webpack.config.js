@@ -15,11 +15,11 @@ module.exports = {
       { test: /\.css$/, use: ['vue-style-loader', 'css-loader'], },
       { test: /\.vue$/, loader: 'vue-loader' },
       { test: /\.ts$/, loader: 'ts-loader', exclude: /node_modules/, options: { appendTsSuffixTo: [/\.vue$/] } },
-      { test: /\.(png|jpg|gif|svg|html)$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } }
+      { test: /\.(png|jpg|gif|svg|html|json)$/, loader: 'file-loader', options: { name: '[name].[ext]?[hash]' } }
     ],
   },
   plugins: [
-    new CopyWebpackPlugin([{ from: "./src/public/*.html", to: "[name].[ext]" }]),
+    new CopyWebpackPlugin([{ from: "./src/public/*.html", to: "[name].[ext]" }, { from: "./src/public/*.png", to: "[name].[ext]" }, { from: "./src/public/*.json", to: "[name].[ext]" }]),
     new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
     new VueLoaderPlugin(),
   ],
