@@ -1,6 +1,8 @@
 {
     "short_name": "account book",
     "name": "account book - 簡単な家計簿",
+    "display": "standalone",
+    "theme_color": "#2196F3",
     "icons": [
         {
             "src": "favicon.png",

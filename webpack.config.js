@@ -19,7 +19,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new CopyWebpackPlugin([{ from: "./src/public/*.html", to: "[name].[ext]" }, { from: "./src/public/*.png", to: "[name].[ext]" }, { from: "./src/public/*.json", to: "[name].[ext]" }]),
+    new CopyWebpackPlugin([
+      { from: "./src/public/*.html", to: "[name].[ext]" }, 
+      { from: "./src/public/*.png" , to: "[name].[ext]" },
+      { from: "./src/public/*.json", to: "[name].[ext]" }
+    ]),
     new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
     new VueLoaderPlugin(),
   ],
