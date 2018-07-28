@@ -29,12 +29,7 @@ export function verify(token: string, callback: jwt.VerifyCallback) {
  */
 export function verifyMiddleware(req: express.Request, res: express.Response, next: Function) {
 
-    if (req.path == '/api/login') {
-        next();
-        return
-    }
-
-    if ((req.path == '/' || req.path == '/script.js')) {
+    if (req.path == '/api/login' || req.path == '/') {
         next();
         return
     }

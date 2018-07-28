@@ -6,7 +6,7 @@ var app = express();
 //#region settings
 var logDirectory = path.join(process.cwd(), './log');
 fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-var logFile = logDirectory + '/access.log';
+var logFile = path.join(logDirectory, 'access.log');
 app.use(require('morgan')('combined', {stream: fs.createWriteStream(logFile, { flags: 'a' })}));
 app.use(require('compression')());
 app.use(express.json());
@@ -16,15 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 //#region routes
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(verifyMiddleware);
-
-app.use('/api/', require('./routes/api-login'))
-app.use('/', require('./routes/index'));
-app.use('/api/days', require('./routes/api-days'));
-app.use('/api/details', require('./routes/api-details'));
-app.use('/api/reports', require('./routes/api-reports'));
-app.use('/api/savings',  require('./routes/api-savings'));
-app.use('/api/settings', require('./routes/api-settings'));
-app.use('/api/status', require('./routes/api-status'));
+app.use('/', require('./routes/'));
 //#endregion
 
 //#region error handler

@@ -5,7 +5,7 @@ var router = express.Router();
 router.post('/login', (req: express.Request, res: express.Response) => {
 
     if (req.body.username != process.env.username || req.body.password != process.env.password) {
-        res.json({token:undefined});
+        res.json({ token: undefined });
         return
     }
 

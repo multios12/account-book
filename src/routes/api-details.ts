@@ -4,14 +4,14 @@ import express from 'express';
 var router = express.Router();
 
 router.get('/', (req, res, next) => {
-        if (!req.query.date) {
+    if (!req.query.date) {
         res.status(501).send('err');
-            return;
-        }
+        return;
+    }
 
-        var sql = 'SELECT * FROM details WHERE date = ?';
-        db.all(sql, [req.query.date], (err: any, rows: any) => res.send(rows));
-    });
+    var sql = 'SELECT * FROM details WHERE date = ?';
+    db.all(sql, [req.query.date], (err: any, rows: any) => res.send(rows));
+});
 
 router.put('/', (req, res, next) => {
     db.serialize(() => {

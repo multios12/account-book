@@ -1,7 +1,6 @@
 import db from '../db';
 import express from 'express';
 import path from 'path';
-import moment from 'moment';
 import { getFirstAndLastDay } from '../modules/settingStore';
 
 var router = express.Router();
@@ -36,7 +35,7 @@ function asdate(rows: any[]) {
         var t = settings.types[j];
         for (var i = 0; i < settings.groups.length; i++) {
             var g = settings.groups[i];
-            var amount = values.filter(r=> r.group == g.value && r.type == t.value).map(r => r.amount).reduce((p, c) => p + c, 0);
+            var amount = values.filter(r => r.group == g.value && r.type == t.value).map(r => r.amount).reduce((p, c) => p + c, 0);
 
             var data = { group: g.value, type: t.value, amount: amount };
             values2.push(data);
