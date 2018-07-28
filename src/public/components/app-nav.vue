@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top"  v-if="this.$route.path != '/login'">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand class="navbar-brand" href="/">account-book</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
@@ -24,7 +24,6 @@
 <script lang="ts">
 import Vue from "vue";
 import moment from "moment";
-import axios from "axios";
 import router from "../router";
 
 export default Vue.extend({

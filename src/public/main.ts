@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import moment from "moment";
-import axios from "axios";
+import axios from "./axiosForApi";
 
 // import 'bootstrap/dist/css/bootstrap.css'
 import './bootstrap.min.css'

@@ -1,7 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-
+import { verifyMiddleware } from './auth';
 var app = express();
 //#region settings
 var logDirectory = path.join(process.cwd(), './log');
@@ -15,13 +15,16 @@ app.use(express.urlencoded({ extended: false }));
 
 //#region routes
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(verifyMiddleware);
+
+app.use('/api/', require('./routes/api-login'))
 app.use('/', require('./routes/index'));
-app.use('/days', require('./routes/days'));
-app.use('/details', require('./routes/details'));
-app.use('/reports', require('./routes/reports'));
-app.use('/savings',  require('./routes/savings'));
-app.use('/settings', require('./routes/settings'));
-app.use('/status', require('./routes/status'));
+app.use('/api/days', require('./routes/api-days'));
+app.use('/api/details', require('./routes/api-details'));
+app.use('/api/reports', require('./routes/api-reports'));
+app.use('/api/savings',  require('./routes/api-savings'));
+app.use('/api/settings', require('./routes/api-settings'));
+app.use('/api/status', require('./routes/api-status'));
 //#endregion
 
 //#region error handler

@@ -1,14 +1,15 @@
+import moment from 'moment';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import detailComponent from './components/page-detail.vue';
+import loginComponent from './components/page-login.vue';
 import monthComponent from './components/page-month-list.vue';
 import monthReportComponent from './components/page-month-report.vue';
-import detailComponent from './components/page-detail.vue';
 import savingComponent from './components/page-saving.vue';
 import settingComponent from './components/page-setting.vue';
 import settingAccountsComponent from './components/part-setting-accounts.vue';
 import settingOutDatesComponent from './components/part-setting-outdates.vue';
 import transferComponent from './components/page-transfer.vue';
-import moment from 'moment';
 
 Vue.use(VueRouter);
 var routes: any = [
@@ -24,6 +25,7 @@ var routes: any = [
     { path: '/:year/:month', component: monthComponent },
     { path: '/:year/:month/report', component: monthReportComponent },
     { path: '/:year/:month/:day', component: detailComponent },
+    { path: '/login', component: loginComponent},
     { path: '/saving', component: savingComponent },
     { path: '/transfer', component: transferComponent },
     { path: '/today', redirect: (to: any) => moment(new Date()).format("/YYYY/MM/DD") },
