@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
+import axios from "../axiosForApi";
 import moment from "moment";
 import statusComponent from "./parts-month-status.vue";
 import router from "../router";

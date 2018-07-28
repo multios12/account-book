@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
+import axios from "../axiosForApi";
 import moment from "moment";
 
 export default Vue.extend({

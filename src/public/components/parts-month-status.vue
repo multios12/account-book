@@ -30,7 +30,7 @@
 <script lang="ts">
 import Vue from "vue";
 import moment from "moment";
-import axios from "axios";
+import axios from "../axiosForApi";
 
 export default Vue.extend({
   data() {
