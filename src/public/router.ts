@@ -1,6 +1,9 @@
 import moment from 'moment';
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import userStore from './userStore';
+
+
 import detailComponent from './components/page-detail.vue';
 import loginComponent from './components/page-login.vue';
 import monthComponent from './components/page-month-list.vue';
@@ -31,4 +34,23 @@ var routes: any = [
     { path: '/today', redirect: (to: any) => moment(new Date()).format("/YYYY/MM/DD") },
 ];
 
-export default new VueRouter({ routes: routes });
+var router = new VueRouter({ routes: routes });
+
+/**
+ * グローバルナビゲーションガード beforeイベント
+ */
+router.beforeEach(async (to, from, next) => {
+    // localStorageにtokenが保存されていなければ、ログイン画面を表示する
+    if (to.path == '/logout') {
+        userStore.logout();
+        next({ path: '/login' });
+        return
+    } else if (!userStore.token() && (to.path != '/login')) {
+        next({ path: '/login' });
+        return
+    }
+
+    next();
+});
+
+export default router;
