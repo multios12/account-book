@@ -4,11 +4,6 @@ import path from 'path';
 import { verifyMiddleware } from './auth';
 var app = express();
 //#region settings
-var logDirectory = path.join(process.cwd(), './log');
-fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-var logFile = path.join(logDirectory, 'access.log');
-app.use(require('morgan')('combined', {stream: fs.createWriteStream(logFile, { flags: 'a' })}));
-app.use(require('compression')());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //#endregion
