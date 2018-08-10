@@ -39,6 +39,7 @@ export function verifyMiddleware(req: express.Request, res: express.Response, ne
 
     verify(token, function (err: Error, decoded: object) {
         if (err && req.path.indexOf('/api') > -1) {
+            console.log(err);
             res.sendStatus(401);
             return
         }
