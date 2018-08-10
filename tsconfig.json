@@ -16,7 +16,8 @@
     }
   },
   "exclude": [
-    "src/public/*.ts"
+    "src/public/*.ts",
+    "node_modules"
   ],
   "include": [
     "src/**/*"

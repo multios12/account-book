@@ -39,4 +39,5 @@ module.exports = {
     "@fortawesome/fontawesome-free-solid": "@fortawesome/fontawesome-free-solid"
   },
   performance: { hints: false },
+  cache: true,
 }
