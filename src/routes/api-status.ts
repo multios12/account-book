@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
 
 function asdate(rows: any[]) {
     var values: any[] = [];
-    var settings = require(path.join(process.cwd(), './data/items.json'));
+    var settings = require(path.join(process.cwd(), './data/settings.json'));
     for (var i = 0; i < settings.accounts.length; i++) {
         var a = settings.accounts[i];
         for (var j = 0; j < settings.types.length; j++) {
