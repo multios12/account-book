@@ -38,6 +38,7 @@ export default Vue.extend({
       this.showDismissibleAlert = !result;
 
       if (result) {
+        this.$emit("success-login");
         router.push("/");
       }
     }
