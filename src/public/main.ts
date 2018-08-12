@@ -1,44 +1,42 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from "bootstrap-vue";
 import moment from "moment";
+import Vue from "vue";
 import axios from "./axiosForApi";
 
-// import 'bootstrap/dist/css/bootstrap.css'
-import './bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import "bootstrap/dist/css/bootstrap.css"
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "./bootstrap.min.css";
 
-import navComponent from './components/app-nav.vue';
-import router from './router'
+import navComponent from "./components/app-nav.vue";
+import router from "./router";
 
-//Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 
 const app = new Vue({
     router,
+    // tslint:disable-next-line:object-literal-sort-keys
     components: { "app-nav": navComponent },
     data: {
-        settings: {},
-        selectedMonth: null,
+        balance: 0,
         selectedDate: null,
-        balance: 0
+        selectedMonth: null,
+        settings: {},
     },
-    created: function () {
-        var self = this;
-        axios.get("./settings").then(value => {
-            self.settings = value.data
-            self.selectedMonth = moment(new Date()).format("YYYY-MM");
-        });
+    created: async function () {
+        const self = this;
+        const value = await axios.get("./settings");
+        self.settings = value.data;
+        self.selectedMonth = moment(new Date()).format("YYYY-MM");
     },
     methods: {
-        monthChanged:function(value:string){
-            this.selectedMonth = value;
+        balanceClicked: (value: number) => {
+            this.balance = value;
         },
-        dateChanged:function(value:string) {
+        dateChanged: (value: string) => {
             this.selectedDate = value;
         },
-        balanceClicked: function(value: number) {
-            this.balance = value;
-        }
-    }
-}).$mount('#app')
+        monthChanged: (value: string) => {
+            this.selectedMonth = value;
+        },
+    },
+}).$mount("#app");

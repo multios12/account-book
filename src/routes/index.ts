@@ -1,17 +1,24 @@
-import express from 'express';
-var router = express.Router();
+import express from "express";
+import apiDays from "./api-days";
+import apiDetails from "./api-details";
+import apiLogin from "./api-login";
+import apiReports from "./api-reports";
+import apiSavings from "./api-savings";
+import apiSettings from "./api-settings";
+import apiStatus from "./api-status";
+const router = express.Router();
 
 /* homepage Routing */
-router.get('/', (req, res, next) => res.sendfile('../public/index.html'));
+router.get("/", (req, res, next) => res.sendfile("../public/index.html"));
 
 //#region API Routings
-router.use('/api/', require('./api-login'))
-    .use('/api/days', require('./api-days'))
-    .use('/api/details', require('./api-details'))
-    .use('/api/reports', require('./api-reports'))
-    .use('/api/savings', require('./api-savings'))
-    .use('/api/settings', require('./api-settings'))
-    .use('/api/status', require('./api-status'));
+router.use("/api/", apiLogin)
+    .use("/api/days", apiDays)
+    .use("/api/details", apiDetails)
+    .use("/api/reports", apiReports)
+    .use("/api/savings", apiSavings)
+    .use("/api/settings", apiSettings)
+    .use("/api/status", apiStatus);
 //#endregion
 
-module.exports = router;
+export default router;

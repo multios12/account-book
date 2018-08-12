@@ -1,18 +1,18 @@
-import express from 'express';
-import { settings, write } from '../modules/settingStore'
-import moment from 'moment';
+import express from "express";
+import moment from "moment";
+import { settings, write } from "../modules/settingStore";
 
-var router = express.Router();
+const router = express.Router();
 
-router.get('/', (req, res, next) => res.json(settings));
+router.get("/", (req, res, next) => res.json(settings));
 
-router.post('/outdates', (req, res, next) => {
-  var value = req.body;
-  var selectedMonth = moment(new Date(value.outdate)).format("YYYY-MM");
-  if (!settings.outdates) settings.outdates = [];
+router.post("/outdates", (req, res, next) => {
+  const value = req.body;
+  const selectedMonth = moment(new Date(value.outdate)).format("YYYY-MM");
+  if (!settings.outdates) { settings.outdates = []; }
   for (let index = 0; index < settings.outdates.length; index++) {
     const m = moment(new Date(settings.outdates[index].outdate)).format("YYYY-MM");
-    if (m == selectedMonth) {
+    if (m === selectedMonth) {
       settings.outdates[index] = value;
 
       settings.outdates.sort(compare);
@@ -34,4 +34,4 @@ function compare(a: { outdate: string }, b: { outdate: string }) {
   }
   return 0;
 }
-module.exports = router;
+export default router;

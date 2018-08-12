@@ -1,7 +1,4 @@
-/data/db.sqlite
-/data/secretKey
-/data/settings.json
+/data/
 /docker
 /node_modules
 /dist
-/log
