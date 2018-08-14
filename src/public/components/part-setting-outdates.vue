@@ -11,13 +11,13 @@
       -->
     </div>
     <div class="table-responsive">
-      <b-form inline>
+      <b-form inline class="mb-1">
         <b-form-select v-model="selectedMonth" :options="months" @change="changeMonth" class="mr-1" />
-        -
-        <b-input v-model="selectedDay" type="number" />
+        <span class="mr-1">-</span>
+        <b-input v-model="selectedDay" type="number" class="mr-1" />
         <b-button variant="primary" size="sm" @click="regist" >regist</b-button>
       </b-form>
-      <b-table small :fields="fields" :items="settings.outdates">
+      <b-table small :fields="fields" :items="items">
         <template slot="deleteColumn" slot-scope="data">
           <b-button variant="secondary" size="sm" @click="deleteRow(data.index)">delete</b-button>
         </template>
@@ -53,35 +53,35 @@ export default Vue.extend({
         text: targetDate.format("YYYY-MM")
       });
     }
-    this.items = this.settings.outdates;
     this.selectedMonth = moment(new Date()).format("YYYY-MM");
-    this.changeMonth();
   },
   watch: {
-    items: function() {
+    settings: function() {
       this.items = this.settings.outdates;
-    }
+      this.selectedMonth = moment(new Date()).format("YYYY-MM");
+    },
+    selectedMonth: function() {
+      var dates = this.getFirstAndLastDay(this.selectedMonth);
+      this.selectedDay = moment(dates.endDate).format("DD");
+    },
   },
   methods: {
     changeMonth: function() {
       var dates = this.getFirstAndLastDay(this.selectedMonth);
       this.selectedDay = moment(dates.endDate).format("DD");
-    },
-    regist: function() {
+    },    regist: function() {
       var self = this;
       axios
         .post("./settings/outdates", {
-          outdate: self.selectedMonth + "-" + self.selectedDay
+          outdate: `${self.selectedMonth}-${self.selectedDay}`
         })
-        .then(value =>{
-          self.settings.outdates.splice(0, self.settings.outdates.length);
-          self.settings.outdates.push(value.data);
-          console.log(self.settings.outdates);
+        .then(v => {
+          this.items = v.data;
         });
     },
     deleteRow: function(index: number) {
-      this.items.splice(index, 1);
-      this.items.sort();
+      const uri = `./settings/outdates/${index}`;
+      axios.delete(uri).then(v => (this.items = v.data));
     },
     getFirstAndLastDay: function(month: string) {
       var startDate = new Date(month + "-1");

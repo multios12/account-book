@@ -15,10 +15,21 @@ router.get("/", (req, res, next) => {
         (err: any, rows: any) => res.send(asdate(dates.startDate, dates.endDate, rows)));
 });
 
+/**
+ * 指定された期間の1日ごとに支出を集計して返す
+ *
+ * @param startDate 開始日
+ * @param endDate 終了日
+ * @param rows 集計元詳細データ
+ * @return 集計結果データ
+ */
 function asdate(startDate: Date, endDate: Date, rows: any[]) {
     const values: any[] = [];
-    for (let i = 1; i <= endDate.getDate(); i++) {
-        const t = moment(new Date(startDate.getFullYear(), startDate.getMonth(), i)).format("YYYY-MM-DD");
+
+    let targetMoment = moment(startDate);
+    for (let i = 0; i <= moment(endDate).diff(moment(startDate), "days"); i++) {
+
+        const t = targetMoment.format("YYYY-MM-DD");
         const cash = rows.filter((r) => r.date === t && r.type === 10).map((r) => r.amount).reduce((p, c) => p + c, 0);
         const bank = rows.filter((r) => r.date === t && r.type === 20).map((r) => r.amount).reduce((p, c) => p + c, 0);
         const credit = rows.filter((r) => r.date === t && r.type === 30)
@@ -27,6 +38,7 @@ function asdate(startDate: Date, endDate: Date, rows: any[]) {
 
         const data = { date: t, cash, bank, credit };
         values.push(data);
+        targetMoment = targetMoment.add("days", 1);
     }
     return values;
 }

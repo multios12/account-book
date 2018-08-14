@@ -9,17 +9,15 @@ http.interceptors.request.use((config) => {
         return config;
     }
     return config;
-},  (error) => {
+}, (error) => {
     return Promise.reject(error);
 });
 
 http.interceptors.response.use((response) => {
     return response;
 }, (error: AxiosError) => {
-    if (error.response.status === 401) {
-        // 認証エラー時、ログイン画面にリダイレクトする
-        router.push("/login");
-    }
+    // 認証エラー時、ログイン画面にリダイレクトする
+    if (error.response.status === 401) { router.push("/login"); }
     return Promise.reject(error);
 });
 

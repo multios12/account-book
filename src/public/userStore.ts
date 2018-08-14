@@ -3,7 +3,7 @@ import axios from "axios";
 /** 認証オブジェクト */
 const auth = {
     /** 認証とログイン処理を実行する */
-    login: async function (username: string, password: string) {
+    async login(username: string, password: string) {
         const url = `api/login`;
         const body = { username, password };
         const response = await axios.post(url, body);
@@ -19,10 +19,10 @@ const auth = {
         return loggedIn;
     },
     /** ログアウト処理を実行する */
-    logout: function () {
+    logout() {
         localStorage.removeItem("token");
     },
-    token: function () {
+    token() {
         return localStorage.getItem("token");
     },
 };

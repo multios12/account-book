@@ -18,7 +18,7 @@
       </b-navbar-nav>
 
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown>
+      <b-nav-item-dropdown right>
         <!-- Using button-content slot -->
         <template slot="button-content">
           <i class="fas fa-user"></i>
