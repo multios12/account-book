@@ -3,6 +3,7 @@ import fs from "fs";
 import moment from "moment";
 import path from "path";
 import { isUndefined } from "util";
+
 export let settings: {
     /** 締め日リスト */
     outdates: Array<{ month: string, outdate: string }>,
@@ -37,14 +38,14 @@ export function getFirstAndLastDay(month: string) {
     assert(month.length === 7);
 
     // 開始日の特定
-    const startMoment = moment(month + "-01");
+    let startMoment = moment(month + "-01");
     const backMonth = moment(month + "-01").add("months", -1).format("YYYY-MM");
     for (const outdate of settings.outdates) {
         if (outdate.month === backMonth) { startMoment = moment(outdate.outdate).add("days", 1); }
     }
 
     // 終了日の特定
-    const endMoment = moment(month + "-01").add("months", 1).add("days", -1);
+    let endMoment = moment(month + "-01").add("months", 1).add("days", -1);
     for (const outdate of settings.outdates) {
         if (outdate.month === month) { endMoment = moment(outdate.outdate); }
     }
