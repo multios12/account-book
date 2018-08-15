@@ -22,11 +22,13 @@ const app = new Vue({
         selectedMonth: null,
         settings: {},
     },
-    created: async function () {
-        const self = this;
-        const value = await axios.get("./settings");
-        self.settings = value.data;
-        self.selectedMonth = moment(new Date()).format("YYYY-MM");
+    async created() {
+        if (this.$route.path !== "/login") {
+            const self = this;
+            const value = await axios.get("./settings");
+            self.settings = value.data;
+            self.selectedMonth = moment(new Date()).format("YYYY-MM");
+        }
     },
     methods: {
         balanceClicked: (value: number) => {

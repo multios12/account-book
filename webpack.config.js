@@ -1,7 +1,8 @@
-var path = require('path')
-var webpack = require('webpack')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const { VueLoaderPlugin } = require('vue-loader')
+var path = require('path');
+var webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: './src/public/main.ts',
@@ -19,13 +20,10 @@ module.exports = {
     ],
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: "./src/public/*.html", to: "[name].[ext]" }, 
-      { from: "./src/public/*.png" , to: "[name].[ext]" },
-      { from: "./src/public/*.json", to: "[name].[ext]" }
-    ]),
+    new CopyWebpackPlugin({ from: "./src/public/*.{html,png,json}", to: "[name].[ext]" }),
     new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
     new VueLoaderPlugin(),
+    new GenerateSW({swDest: 'sw.js'}),
   ],
   resolve: {
     alias: { 'vue$': 'vue/dist/vue.esm.js' },
