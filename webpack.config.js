@@ -20,7 +20,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CopyWebpackPlugin({ from: "./src/public/*.{html,png,json}", to: "[name].[ext]" }),
+    new CopyWebpackPlugin([{ from: './src/public/*.{html,png,json}', to: "[name].[ext]" }]),
     new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery', Popper: ['popper.js', 'default'] }),
     new VueLoaderPlugin(),
     new GenerateSW({swDest: 'sw.js'}),

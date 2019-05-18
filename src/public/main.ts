@@ -32,13 +32,13 @@ const app = new Vue({
     },
     methods: {
         balanceClicked: (value: number) => {
-            this.balance = value;
+            app.balance = value;
         },
         dateChanged: (value: string) => {
-            this.selectedDate = value;
+            app.selectedDate = value;
         },
         monthChanged: (value: string) => {
-            this.selectedMonth = value;
+            app.selectedMonth = value;
         },
     },
 }).$mount("#app");
